@@ -1,5 +1,4 @@
 # 집합(묶음)형 자료형 : str ,list, tuple, set, dict
-from docutils.languages import fa
 
 print('-----str------')
 # str : 문자열 자료형. 순서가 있다.-> 인덱싱, 슬라이싱 가능, 수정 불가(int, float, complex, bool, str, tuple)
@@ -33,14 +32,14 @@ aa = 'Life is too long'
 bb = aa.replace('life', 'Your leg') #문자 치환하기 ex) life -> Your leg
 print(bb)
 
-print('-----list------') # 형식 list(), [요소...], 순서가 있다, 수정 가능, 중복 가능
+print('-----list------') # 형식 list(), [요소...], 순서가 있다, 수정 가능, 중복 가능 다됨
 a = [1,2,3]
 print(a)
 b = [10, a, 20.5, True, '문자열']
 print(b, id(b))
 print(b[0], b[1], b[1][2]) #인덱싱가능 ->슬라이싱도 가능하다.
 print((b[2:5]))
-print(b[-2::2])
+print(b[-2::2]) #[-2]인덱스 이상 -> [-1] = True이상,[2]인덱스 미만 (20.5) 
 print(b[1][:2])
 
 print()
@@ -66,7 +65,7 @@ print('자료구조 관련 : liFO') #셔틀콕 구조
 kbs = [1,2,3]
 kbs.append(4)
 print(kbs)
-kbs.pop() #꺼내다 -> 제일 위에(마지막것 부터)
+kbs.pop() #꺼내다 -> 제일 위에(마지막것 부터) ex)여기선 4
 print(kbs)
 kbs.pop()
 print(kbs)
@@ -75,7 +74,7 @@ print('자료구조 관련 : FiFO') #파이프 구조
 kbs = [1,2,3]
 kbs.append(4)
 print(kbs)
-kbs.pop(0) #꺼내다 -> 제일 앞에(처음것 부터)
+kbs.pop(0) #꺼내다 -> 제일 앞에(처음것 부터) ex)여기선 1
 print(kbs)
 kbs.pop(0)
 print(kbs)
@@ -128,7 +127,7 @@ mydic = dict(k1=1, k2='abc',k3=1.2)
 print(mydic, type(mydic), id(mydic))
 
 dic = {'파이썬':'뱀', '자바':'커피', '스프링':'용수철'}
-dic['여름'] = '장마철' #추가
+dic['여름'] = '장마철' #추가 여름이라는 key값에 장마철이라는 value넣기
 print(dic, type(dic), len(dic))
 del dic['여름'] #삭제
 print(dic, type(dic), len(dic))

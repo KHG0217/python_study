@@ -16,7 +16,7 @@ v1, *v2= 1,2,3,4,5 # *packing 연산 1만 v1이 참조하고 나머지 v2가 참
 print(v1)
 print(v2)
 
-*v1, v2, v3= 1,2,3,4,5 # *packing 연산 1,2,3,4 v1이 참조하고 나머지 v2가 참조
+*v1, v2, v3= 1,2,3,4,5 # *packing 연산 1,2,3,4 v1이 참조하고 나머지 v2가 v3가 하나씩 참조
 print(v1)
 print(v2)
 print(v3)

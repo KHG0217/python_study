@@ -37,7 +37,7 @@ print()
 A = 1; a = 2;
 print(A, ' ',a) #파이썬은 변수선언시 대소문자를 구분하고있다.
 
-# for = 1 # 주석처리 키워드를 변수로 사용할 수가 없다.
+# for = 1 # 키워드를 변수로 사용할 수가 없다. Ctrl+/로 주석처리 할 수있다.
 
 import keyword
 print('키워드 목록: ', keyword.kwlist)

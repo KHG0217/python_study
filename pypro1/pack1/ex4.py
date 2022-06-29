@@ -7,7 +7,7 @@ ss = "1234 56 abc가나다\mbcnabcABC_123556_6python is fun파이썬 만세"
 print(re.findall('123', ss)) #ss에서 '123'만 찾아준다 list 타입
 print(re.findall(r'가나',ss)) #ss에서 '가나'를 찾아준다,r을 붙여주면 이스케이프가 아니라고 알려준다.(특수문자 찾을때)
 print(re.findall(r'[0-9]',ss)) #ss에서 0~9까지 한글자씩 찾아준다.
-print(re.findall(r'[0-9]+',ss)) #*,+?,{횟수} +1개이상:1~9다음 있으면 읽어줌
+print(re.findall(r'[0-9]+',ss)) #*,+?,{횟수} +1개이상:1~9다음 있으면 다읽어줌
 print(re.findall(r'[0-9]*',ss)) #0개이상
 print(re.findall(r'[0-9]?',ss)) #?0개거나 1개
 print(re.findall(r'[a-z,A-B]',ss))
@@ -24,7 +24,7 @@ print()
 print(re.findall(r'.bc',ss)) #. <-아무글자나 +bc를 찾아준다.
 print(re.findall(r'a..',ss)) #a로 시작하고 ..<-두글자 아무거나 총 세글자
 print(re.findall(r'^1',ss)) #첫글자가 1로시작하는거 찾기
-                            #^:대괄호에 붙으면 부정, 없이쓰면 첫시작 문자가
+                            #^:대괄호에 붙으면 부정, 없이쓰면 첫시작 문자가 1
 print(re.findall(r'만세$',ss)) #$:마지막 글자가 만세     
 print()
 print(re.findall(r'\d',ss)) #\d:숫자 찾기
@@ -53,7 +53,7 @@ ss= """My name is tom.
 I am happy """ #주석문자열을 이용하여 str문을 완성할 수 있다.
 print(ss)
 
-p = re.compile('^.+',re.MULTILINE) #flag 사용,여러행을 한번에 넣을때 사용
+p = re.compile('^.+',re.MULTILINE) #flag 사용,여러행을 한번에 넣을때 사용 list에 넣음
 print(p.findall(ss))
 imsi = p.findall(ss) #변수에 담아서 행별로 읽어올 수 있다.
 print(imsi[0]) 
