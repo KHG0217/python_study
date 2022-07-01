@@ -107,7 +107,7 @@ print('dict(사전형) 자료로 과일 값 출력 ---')
 price = {'사과':2000, '감':500, '오렌지':1000} #시세
 guest = {'사과':2, '감':3} #고객이 구매한 상품
 bill = sum(price[f] * guest[f] for f in guest) #key를 찾아서 value값을 반환함 price[f]->사과 =2000 감=500
-print('고객이 구매한 과일 총액은 {}원'.format(bill))
+print('고객이 구매한 과일 총액은 {0}원'.format(bill))
  
 print()
 datas = [1,2,'a',True,3]
