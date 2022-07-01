@@ -66,7 +66,7 @@ def outer2(tax):    #tax 지역변수    outer2에서만 유효
     def inner2(su, dan):
         amount = su* dan * tax
         return amount
-    return inner2 #내부함수를 반환하는 클로저
+    return inner2 #내부함수 주소를 반환하는 클로저
 
 #1분기에는 금액에 대한 세금(tax)이 0.1이 부과
 q1 = outer2(0.1)
@@ -81,6 +81,7 @@ print('result2 : ',result2)
 q2 = outer2(0.05)
 result3 =q2(5, 50000)
 print('result3 : ',result3)
+
 
 
 
