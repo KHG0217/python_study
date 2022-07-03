@@ -1,5 +1,5 @@
 # 함수 : 인수(argument)와 매개변수(parameter)의 매칭
-# 매개변수 유형: 위치 매개변수, 기본값 매개변수, 키워드 매개변수, 가변 매개변수
+# 매개변수 유형: 위치 매개변수, 기본값 매개변수, 키워드 매개변수, 가변 매개변수:a,b,c(값이 바뀌는 변수)
 
 #                    end=5 <- 기본값 매개변수
 def show_gugu(start, end=5):
@@ -20,7 +20,7 @@ print()
 #show_gugu(end=3, 2) #SyntaxError: positional argument follows keyword argument
 #                    위치 매개변수 오류
 print()
-# show_gugu(start = 2,3) #위치 매개변수 오류
+# show_gugu(start = 2,3) #위치 매개변수 오류/ 앞에 키워드를 써주면 뒤에 키워드도 써줘야함
 print()
 
 print('가변 인수 처리 ---')
@@ -41,7 +41,7 @@ def func2(a, *ar):
 func2('비빕밥', '공기밥', '볶음밥', '주먹밥')
 
 print()
-def select_process(choice, *ar):
+def select_process(choice, *ar): #키워드 매개변수
     if choice == 'sum':
         re = 0
         for i in ar:

@@ -10,7 +10,7 @@ def do_func1():
     
 def do_func2(arg1, arg2):   # do_func2(para1, para2) parameter:매개변수
     tmp = arg1 + arg2
-    # return tmp    #함수는 반환값이 꼭 있다, 리턴을 작성하지면 None을 반환한다.
+    # return tmp    #함수는 반환값이 꼭 있다, 아무것도 작성하지 않은 리턴을 작성하지면 None을 반환한다.
     """    
     if tmp % 2 == 1:
         return      #리턴뒤에는 함수 종료 리턴뒤에 코딩해도 읽지x(죽은문장)
@@ -20,10 +20,10 @@ def do_func2(arg1, arg2):   # do_func2(para1, para2) parameter:매개변수
     """
     if tmp % 2 == 1:
         return #홀수면 none
-    print("tmp출력 : ", tmp) #if문이 아니면 찍고 none을 반환
+    print("tmp출력 : ", tmp) #if문이 아니면(짝수면) 찍고 none을 반환
     
 # 함수 호출
-aa = do_func1 #주소를 치환한것
+aa = do_func1 #주소를 치환한것, 같은주소를 가르킴
 print(do_func1) 
 print(aa)
 do_func1()
@@ -40,8 +40,8 @@ def area_tri(a, b):
     area_print(result) #함수가 다른함수를 호출할 수 있다.
     print('c')
 
-def area_print(result):
-    print('삼각형의 면적은: ',str(result))
+def area_print(other_result):
+    print('삼각형의 면적은: ',str(other_result))
     print('b')
     
 area_tri(5,4)

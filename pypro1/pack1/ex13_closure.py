@@ -23,7 +23,7 @@ print(sbs(2, 3))
 print(kbs(2, 3))
 del kbs
 print(mbc(2, 3)) #kbs를 지웠지만 mbc와 sbs는 살아있음
-
+print('워밍업')
 print('\n클로저를 사용하지 않은 경우 -------------')
 def out():
     count = 0

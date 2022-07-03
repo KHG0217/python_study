@@ -3,7 +3,6 @@
 #    statement
 # for i in [1,2,3,'good','nice']:
 # for i in (1,2,3,'good','nice'):
-from dask.array.chunk import sum
 for i in {1,2,3,'good','nice'}:
     print(i, end = ' ')
  
@@ -17,6 +16,7 @@ print()
 for k in soft.keys():
     print(k,end =' ')        
 
+print()
 
 for k in soft.values():
     print(k,end =' ') 
@@ -29,7 +29,7 @@ print()
 
 li = ['a','b','c']
 for i, d in enumerate(li): # enumerate <- index와 데이터를 반환하는 내장함수
-         print(i, ' ', d)
+    print(i, ' ', d)
 
 print()
 for n in [2, 3]:
@@ -106,21 +106,21 @@ for ss in ['111-1234','일이삼-사오육칠','222-1234','2221234']:
 print('dict(사전형) 자료로 과일 값 출력 ---')
 price = {'사과':2000, '감':500, '오렌지':1000} #시세
 guest = {'사과':2, '감':3} #고객이 구매한 상품
-bill = sum(price[f] * guest[f] for f in guest) #key를 찾아서 value값을 반환함 price[f]->사과 =2000 감=500
+bill = sum(price[f] * guest[f] for f in guest) #f를 순서대로 돌아 계싼함 price[0]->2000 guest[0]->2 2000*2=4000
 print('고객이 구매한 과일 총액은 {0}원'.format(bill))
  
 print()
-datas = [1,2,'a',True,3]
+datas = [1,2,'a',True,3] #list타입 모두 ok
 li = [i * i for i in datas if type(i)==int]
 print(li)
 
-datas = {1,1,2,2,3}
+datas = {1,1,2,2,3} #set 타입 중복 x
 se = {i *i for i in datas}
 print(se)
 
-id_name = {1:'tom', 2:'oscar'}
+id_name = {1:'tom', 2:'oscar'} #dict 형식 {'key':value...}
 name_id = {val:key for key, val in id_name.items()}
-print(name_id)
+print(name_id) #dict 형식으로 표출
 
 print('-- 수열 생성 함수 : range() -----')
 print(list(range(1, 6))) #1부터 6전까지 list 타입

@@ -36,7 +36,7 @@ print('숫자 중 3미만이 있나요?',result)
 print('복수개의 집합형 자료로 tuple 작성')
 x = [10, 20, 30]
 y = ['a', 'b']
-for i in zip(x,y): #zip -> 쌍을 이루어주는 함수
+for i in zip(x,y): #zip -> 쌍을 이루어주는 함수 , 짝이안맞으면 안맞는 하나는 버림
     print(i)
     
 
