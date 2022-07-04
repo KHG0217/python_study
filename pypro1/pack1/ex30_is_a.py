@@ -26,13 +26,13 @@ print('---------Employee-----------')
 class Employee(Person):
     say  = '일하는 동물'
     subject = '근로자'
-    def __init__(self): #? 없으면 오류
+    def __init__(self): # 없으면 오류
                         #이유: 없으면 부모의 생성자를 호출, 여기서는 def __init__(self, nai)
                         #    오류없이 실행하려면 아래코드 e = Employee()에 e = Employee(nai값)을 넣어줘야함
         print('Employee 생성자')
         
     def printInfo(self):
-        print('Employee 클래스의 printInfo') #부모와 자식 메소드 모두 실행
+        print('Employee 클래스의 printInfo') 
         
     def e_printInfo(self):
         self.printInfo()    # 찾다가 없으면 부모 클래스로 올라감

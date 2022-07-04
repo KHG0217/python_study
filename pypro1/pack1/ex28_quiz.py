@@ -4,7 +4,7 @@ class CoinIn:   #계산
     # coin =  0# 넣은 동전
     # change = 0 #거스름 돈
    
-    def culc(self, cupCount):
+    def calc(self, cupCount):
         result = ''      
         if self.coin < 200:
             result = '요금부족'
@@ -20,13 +20,13 @@ class CoinIn:   #계산
 class Machine:
     # cupCount=1
     def __init__(self):
-        self.coInIn = CoinIn() # 생성자에서 일어난 클래스의 포함
+        self.CoinIn = CoinIn() # 생성자에서 일어난 클래스의 포함
     
     def showData(self):
-        self.coinIn.coin = int(input('동전을 입력하세요'))
+        self.CoinIn.coin = int(input('동전을 입력하세요'))
         self.cupCount = int(input('몇 잔 을 원하세요'))
-        print(self.coinIn.calc(self.cupCount))
+        print(self.CoinIn.calc(self.cupCount))
         
-Machine().showData()        
-       
+Machine().showData()
+        
     

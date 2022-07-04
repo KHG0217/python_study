@@ -22,7 +22,7 @@ class Dog(Animal):  #Dog은 Animal의 자식이된다 파이썬에서 상속시�
     pass
 dog1 = Dog()
 dog1.my()
-dog1.move() #dog을 뭔저 뒤지고 엎으면 -> 부모로 올라감
+dog1.move() #dog을 뭔저 뒤지고 없으면 -> 부모로 올라감
 print('nai :', dog1.nai)
 
 print()

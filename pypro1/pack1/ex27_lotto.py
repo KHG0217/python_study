@@ -20,7 +20,7 @@ class LottoMachine:
         for a in range(45):
             print(self.ballList[a].num, end=' ') 
         
-        return self.ballList[0:6]
+        return self.ballList[0:6] # 0~5까지 6개
 class LottoStart:
     def __init__(self):
         self.machine=LottoMachine()   # 클래스의 포함
