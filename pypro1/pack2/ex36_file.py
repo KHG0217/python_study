@@ -54,7 +54,7 @@ try:
     listData = ['장마철', '장대비 예고']
     tupleData = (dicData, listData)
     
-    with open('hello.data', mode='wb') as ob1:  
+    with open('hello.data', mode='wb') as ob1:  #hello.data파일을 만들고 tupleData,listData의 내용을 넣음
         pickle.dump(tupleData, ob1)   # pickle.dump(대상, 파일객체)
         pickle.dump(listData, ob1)
         
