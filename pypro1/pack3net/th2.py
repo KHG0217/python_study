@@ -8,7 +8,7 @@ print('오늘의 요일은: %d'%(aa.tm_yday)) #1월1일부터 시작해서 몇�
 
 import threading
 
-def time_show():
+def time_show(): 
     now = time.localtime()
     print('현재는 {0}년 {1}월 {2}일'.format(now.tm_year, now.tm_mon, now.tm_mday), end=' ')
     print('현재는 {0}시 {1}분 {2}초'.format(now.tm_hour, now.tm_min, now.tm_sec))
