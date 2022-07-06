@@ -1,5 +1,5 @@
 # 스레드를 이용해 날짜 및 시간 출력
-import time
+import time 
 aa = time.localtime()
 print('현재는 {0}년 {1}월 {2}일'.format(aa.tm_year, aa.tm_mon, aa.tm_mday))
 print('현재는 {0}시 {1}분 {2}초'.format(aa.tm_hour, aa.tm_min, aa.tm_sec))
