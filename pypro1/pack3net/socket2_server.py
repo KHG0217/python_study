@@ -4,7 +4,7 @@ import socket
 import sys
 
 HOST = '127.0.0.1'
-# HOST = ''
+# HOST = '' localhost 서버면 '' 써도됨
 PORT = 7878
 
 serversock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 

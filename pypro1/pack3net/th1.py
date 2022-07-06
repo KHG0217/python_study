@@ -6,7 +6,7 @@ import threading, time
 
 def myrun(id):
     for i in range(1, 11):
-        print('id={}-->{}'.format(id,1))
+        print('id={}-->{}'.format(id,i))
         time.sleep(0.3)
 
 # 스레드를 사용하지 않은 경우
@@ -15,7 +15,7 @@ def myrun(id):
 
 # 스레드를 사용하는 경우
 # threading.Thread(target='수행함수명')
-th1 = threading.Thread(target=myrun, args=('일')) #사용자 정의 스레드 1
+th1 = threading.Thread(target=myrun, args=('일')) #사용자 정의 스레드 1, args-> myrun에 들어갈 아규먼트
 th2 = threading.Thread(target=myrun, args=('이')) #사용자 정의 스레드 2
 th1.start() #스레드 시작
 th2.start() #스레드 시작
