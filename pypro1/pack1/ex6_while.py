@@ -1,5 +1,3 @@
-# 반복문 while
-from mkl_random.mklrand import rand
 a = 1
 
 while a <= 5:
@@ -22,7 +20,7 @@ while i <= 100:
     if i % 3 ==0:
         hap += i
     i += 1    
-print('합은 ' + str(hap))
+print('합' + str(hap))
 
 print()
 

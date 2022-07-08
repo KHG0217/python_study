@@ -141,4 +141,5 @@ print(dic.get('파이썬'))# key값으로 value 뽑아내기.
 print('파이썬' in dic) #dic에 '파이썬'이 있는지 확인 True
 print('파이' in dic) #dic에 '파이'이 있는지 확인 False
 
-
+for i in {1, 2, 3, 4, 5, 5, 5, 5}:
+  print(i, end = ' ')

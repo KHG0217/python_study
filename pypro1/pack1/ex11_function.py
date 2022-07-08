@@ -8,7 +8,7 @@ def func_soccer():
     name = '미스터 손' # 지역변수 (현재 함수 내에서만 유효)
     player = '지역대표'
     print(name, player)
-    
+    # print(f"{name} {player}") f String
 print(func_soccer)
 func_soccer()
 # print(name) #오류: func_soccer 함수안에서만 유효

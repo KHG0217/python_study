@@ -34,7 +34,7 @@ bb = do_func2(5, 5) #argument:전달인자, 인자
 print('반환된 bb는', bb)   
 
 print('--' * 20)
-def area_tri(a, b):
+def area_tri(a: int, b: int) -> None:
     print('a')
     result = a * b /2
     area_print(result) #함수가 다른함수를 호출할 수 있다.

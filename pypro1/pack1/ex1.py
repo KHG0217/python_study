@@ -59,3 +59,6 @@ print([3],type([3])) #list
 print({3},type({3})) #set
 print({'key':3},type({'key':3})) #dict -> json타입과 궁합이 잘맞는다.
 
+print(list(range(1, 6, 2)))
+
+

@@ -17,7 +17,7 @@ def check():
         """.format(num,name)
         cursor.execute(sql1)
         datas1 = cursor.fetchone()
-       
+        
         if len(datas1) == 0:
             print('직원명과 직원번호가 일치하지 않습니다.')
         else:
@@ -33,8 +33,9 @@ def check():
             for num,name,tel in datas2:
                 print('고객번호:{0}, 고객이름:{1}, 고객번호:{2}'.format(num,name,tel))
             print()
-            
+        
             print('관리 인원수: ',members )
+
             
     except Exception as e:
         print('err :',e)

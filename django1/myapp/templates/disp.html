@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>disp.html</title>
+<link rel="stylesheet" type="text/css" href="/static/css/test.css"> <!-- css로딩 -->
+<!-- 
+	<script type="text/javascript">
+	window.onload = function(){
+	alert("자바스크립트");
+}
+</script>
+ -->	
+ <script type="text/javascript" src="/static/js/test.js"> </script> <!-- 자바스크립트 로딩 -->
+ 
+ <!-- 제이커리로딩 -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+ <script type="text/javascript">
+ $(document).ready(function(){
+	//alert("good");
+	 $("#myImg").click(function(){
+		 funcgo();
+	 });
+ });
+ </script>
+
+
+<style type="text/css">
+</style>
+</head>
+<body>
+<span style="color:blue">안녕</span> <!--  div는 행의 모두를 차지 span은 딱 크기에 맞게 차지 -->
+{{key|safe}} <!-- html문이 오면 html문으로 해석해서 읽어줘 {{key|safe}} -->
+<hr>
+<img alt="" src="/static/images/abc.png" id="myImg">
+</body>
+</html>

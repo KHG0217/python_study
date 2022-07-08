@@ -23,7 +23,6 @@ def Hap(x, y):
     return x + y
 
 print(Hap(1, 2))
-
 print((lambda x, y:x + y)(1,2)) #Lambda 형태
 
 g = lambda x, y:x * y #lambda의 객체가 생성되고 g가 참조함
@@ -54,6 +53,11 @@ print(list(filter(lambda a:a < 5, range(10)))) #5미만인 숫자만 list에 들
 print(list(filter(lambda a:a % 2, range(10)))) #true인 홀수만 찍힘 2로 나눌때 0은 false 그외는 true
 # 1 ~ 100 사이의 정수 중 5의 배수이거나 7의 배수만 출력
 print(list(filter(lambda a:a % 5 == 0 or a % 7 == 0,range(1,101))))
+
+*v1, v2, v3 = [1, 2, 3, 4, 5]
+print(v1)
+print(v2)
+print(v3)
 
    
 

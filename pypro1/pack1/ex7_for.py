@@ -39,6 +39,7 @@ for n in [2, 3]:
         
 print()
 datas = [1,2,3,4,5]
+# max(datas, key=len)
 for i in datas:
     if i == 2:continue
     if i == 3:break
@@ -112,6 +113,8 @@ print('고객이 구매한 과일 총액은 {0}원'.format(bill))
 print()
 datas = [1,2,'a',True,3] #list타입 모두 ok
 li = [i * i for i in datas if type(i)==int]
+# i ** 2 제곱
+# i ** (1/2) 루트
 print(li)
 
 datas = {1,1,2,2,3} #set 타입 중복 x
@@ -186,10 +189,6 @@ print(words)
 
 for i in range(len(words) - 1):
     print(words[i],words[i+1]) 
- 
- 
- 
- 
  
  
  

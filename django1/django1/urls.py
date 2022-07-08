@@ -22,5 +22,7 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    path('', views.mainFunc) #apprication 마다 view가 있으니 쓸려는 view 패키지명 잘 확인/ 경로에 ''<-아무것도 안했을때 ,갈 view forwarding 방식
+    path('', views.mainFunc), #apprication 마다 view가 있으니 쓸려는 view 패키지명 잘 확인/ 경로에 ''<-아무것도 안했을때 ,갈 view forwarding 방식
+    path('hello', views.helloFunc), 
+    
 ]
