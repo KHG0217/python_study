@@ -21,7 +21,7 @@ def showOsFunc(request):
     
     dict_context = {} #session 자료를 html 파일에 전달할 목적으로 생성
     
-    if "f_os" in request.session:   #request 세션값 중에 있니?
+    if "f_os" in request.session:   # "f_os" 에 담긴 request 세션값이 있니?
         print('유효시간 :', request.session.get_expiry_age())
         dict_context['sel_os'] = request.session['f_os']
         dict_context['message'] = "당신이 선택한 운영체제는 %s" %request.session['f_os'] # 기본 유효시간 30분
@@ -29,7 +29,7 @@ def showOsFunc(request):
         dict_context['sel_os'] = None
         dict_context['message'] ="운영체제를 선택하지 않았네요"
         
-    #참고 : 특전 세션 삭제 request.session['key']
+    #참고 : 특전 세션 삭제 request.session['key'] = NULL
     # set_expory(0) 하면 브라우저가 닫힐 떄 세션이 해제됨
     
     request.session.set_expiry(5) #5초 동안 세션이 유효. 기본값은 30분

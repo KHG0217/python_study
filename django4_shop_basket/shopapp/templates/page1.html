@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = function(){
+	document.querySelector("#btnOk").onclick = function(){
+		frm.submit();
+	}
+}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td><img alt="" src="/static/images/sangpum1.jpg" style="width: 30%">
+			<pre>
+			상품명:사과
+			가격:5000원
+			특징:어쩌구저쩌구
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="cart" name="frm" method="post">{% csrf_token %}
+				<input type="hidden" name="name" value="사과">
+				<input type="hidden" name="price" value="5000">
+				<input type="button" id="btnOk" value="장바구니에 담기">
+				<input type="button" value="홈 페이지로" onclick="history.back()">
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
