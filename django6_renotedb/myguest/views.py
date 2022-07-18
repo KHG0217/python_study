@@ -30,7 +30,7 @@ def InsertFunc(request):
     return render(request, 'insert.html')
 
 def InsertOkFunc(request):
-    if request.method =="POST":
+    if request.method == "POST":
         # print(request.POST.get('title'))
         Guest(
         #    칼럼명=    넘어오는 form의 name값
@@ -39,6 +39,5 @@ def InsertOkFunc(request):
             # regdate = datetime.now() 
             regdate = timezone.now()                 
             ).save() #Guest
-    
     return HttpResponseRedirect('/guest/select') # 추가후 목록보기. Redirect 방식   
     # return redirect('/guest/select')

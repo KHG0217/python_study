@@ -20,7 +20,7 @@ def ListFunc(request):
     
     # 페이징 처리 O ----------
     
-    datas = Sangdata.objects.all().order_by('-code')
+    datas = Sangdata.objects.all().order_by('-code') # 내림차순
     paginator = Paginator(datas, 5) # 페이지 당 5행 씩 출력
     
     try:
@@ -39,6 +39,7 @@ def ListFunc(request):
         
     # 개별 페이지 표시용
     allpage = range(paginator.num_pages + 1) # 0부터 시작하니까 맞추기위해 +1
+    print(allpage)
     
     return render(request, 'list2.html',{'sangpums':data, 'allpage':allpage})
 
