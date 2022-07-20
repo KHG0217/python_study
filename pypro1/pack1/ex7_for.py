@@ -29,7 +29,7 @@ print()
 
 li = ['a','b','c']
 for i, d in enumerate(li): # enumerate <- index와 데이터를 반환하는 내장함수
-    print(i, ' ', d)
+    print("확인!!",i, ' ', d)
 
 print()
 for n in [2, 3]:

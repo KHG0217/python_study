@@ -18,7 +18,6 @@ print('3-2')
 print(data.pivot_table(
     values=['Survived'],index=['Sex','Age'], columns=['Pclass']))
 
-
 print('4-2')
 data2 =  pd.read_csv('testdata/tips.csv')
 print(data2.head(3))
