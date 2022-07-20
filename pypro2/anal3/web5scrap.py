@@ -40,4 +40,5 @@ datas= soup.findAll('a')
 for i in datas[:5]:
     href = i.attrs['href']
     text = i.string
-    print('href:%s, text:%s'%(href,text) )
+    print('href:%s, text:%s'%(href,text))
+    
