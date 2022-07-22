@@ -19,5 +19,5 @@ from quize import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.listFnc)
+    path('',views.listFnc) 
 ]

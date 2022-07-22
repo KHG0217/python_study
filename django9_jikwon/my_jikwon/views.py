@@ -38,7 +38,7 @@ def showFunc(request):
     plt.title('직급별 연봉합과 평균')
     plt.xlabel('연봉')
     fig = plt.gcf()
-    fig.savefig('django9_jikwon/my_jikwon/static/images/jik.png')
+    # fig.savefig('django9_jikwon/my_jikwon/static/images/jik.png')
     
     ypays = list(df['연봉'])
     names = list(df['사번'])
@@ -53,3 +53,5 @@ def showFunc(request):
                    'ypays':ypays,
                    'names':names
                    })
+    
+    
