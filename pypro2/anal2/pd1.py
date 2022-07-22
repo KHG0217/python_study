@@ -155,12 +155,14 @@ print(df.loc['3월', ]) # 행과 열 ('3월'행, 모든열) / : 생략 가능 / 
 print(df.loc[:'2월',['서초']]) # 행과 열 ('2월'이하행, 서초열) / 반환값 dataframe
 print()
 
-print(df.iloc[2]) # 2행 전부
-print(df.iloc[2, :])# 2행 전부
+print('lioc')
+print(df.iloc[2]) # 3행 전부 [0]시작
+print(df.iloc[2, :])# 3행 전부
+print()
 
-print(df.iloc[:3]) # 3행 미만
-print(df.iloc[:3, 2]) # 3행 미만, 2열(0~3)
-print(df.iloc[1:3, 1:3]) # 1,2행 ㅣ만, 1,2열 반환
+print(df.iloc[:3]) # 4행 미만
+print(df.iloc[:3, 2]) # 4행 미만, 3열(0~3)
+print(df.iloc[1:3, 1:3]) # 2,3행 미만, 2,3열 반환
 
 
 

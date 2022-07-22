@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+{{list|safe}}
+<br>
+<p>직급별 연봉합 평균 </p>
+{% if jik_group%}
+	{{jik_group|safe}}
+{% endif %}
+<br>
+<p>부서별 연봉합 평균 </p>
+{% if buser_group%}
+	{{buser_group|safe}}
+{% endif %}
+<br>
+<img src="/static/images/buser.png" style="width: 50%"/>
+<br>
+<br>
+직급별 성별의 빈도표
+{% if ctab%}
+	{{ctab|safe}}
+{% endif %}
+</body>
+</html>

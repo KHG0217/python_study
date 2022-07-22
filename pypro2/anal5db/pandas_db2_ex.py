@@ -13,7 +13,7 @@ try:
 except Exception as e:
     print('읽기 오류:', e)
 
-try:
+
     conn = MySQLdb.connect(**config) # ** dict 타입
     cursor = conn.cursor()
     sql = """
