@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 
-
 # DataFrame 구조 변경 : stack, unstack
 
 df = pd.DataFrame(1000 + np.arange(6).reshape(2,3),
