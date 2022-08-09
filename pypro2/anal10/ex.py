@@ -205,55 +205,162 @@ import pandas as pd
 # 독립변수 : Daily Time Spent on Site, Age, Area Income, Daily Internet use
 # 종속변수 : Clicked Ad
 
-data3 =pd.read_csv("advertising.csv")
-print(data3)
+# data3 =pd.read_csv("advertising.csv")
+# print(data3)
 # print(data3.columns)
 # Index(['Daily Time Spent on Site', 'Age', 'Area Income',
 #        'Daily Internet Usage', 'Ad Topic Line', 'City', 'Male', 'Country',
 #        'Timestamp', 'Clicked on Ad'],
 
-x = data3[['Daily Time Spent on Site','Age','Area Income','Daily Internet Usage']]
-y = data3['Clicked on Ad']
-# print(x)
-# print(y)
+# x = data3[['Daily Time Spent on Site','Age','Area Income','Daily Internet Usage']]
+# y = data3['Clicked on Ad']
+# # print(x)
+# # print(y)
+#
+# model =LogisticRegression().fit(x,y)
+# y_hat = model.predict(x)
+# print('y_hat(분류결과) : ',y_hat[:10])
+# print('실제값: ', y[:10])
+#
+# from sklearn.metrics import confusion_matrix
+# print(confusion_matrix(y,y_hat))
+# # [[464  36]
+# #  [ 67 433]]
+# recall = 464/(464 + 36)        # 재현율 TPR
+# fallout = 67 / (67 + 433)      # 위양성율 FPR
+#
+#
+# from sklearn import metrics
+# cl_rep = metrics.classification_report(y,y_hat)
+# print('cl_rep : ',cl_rep)
+#
+#
+# f_valu = model.decision_function(x)
+# print('f_valu : ', f_valu)
+# fpr, tpr, thresholds = metrics.roc_curve(y,f_valu)
+# print('fpr : ', fpr)
+# print('tpr : ', tpr)
+# print('분류임계값  : ', thresholds)
+#
+# import matplotlib.pyplot as plt
+# plt.plot(fpr,tpr,'o-', label='Logistic Regression')
+# plt.plot([0,1],[0,1], 'k--', label='classifier line(AUC:0.5')
+# plt.plot([fallout],[recall],'ro', ms=10) # 위양성율 , 재현율 값
+# plt.xlabel('fpr')
+# plt.ylabel('tpr')
+# plt.title('ROC curve')
+# plt.legend()
+# plt.show()
+#
+# # AUC ( Area Under the Curve ) : ROC 커브 면적
+# print('AUC : ',metrics.auc(fpr,tpr)) # 1에 가까울 수록 좋은 모델임
+# # AUC :  0.9580599999999999
 
-model =LogisticRegression().fit(x,y)
-y_hat = model.predict(x)
-print('y_hat(분류결과) : ',y_hat[:10])
-print('실제값: ', y[:10])
+# [Randomforest 문제3] 
+#
+# https://www.kaggle.com/c/bike-sharing-demand/data 에서  
+# train.csv를 다운받아 bike_dataset.csv 으로 파일명을 변경한다.
+# 이 데이터는 2011년 1월 ~ 2012년 12월 까지 
+# 날짜/시간. 기온, 습도, 풍속 등의 정보를 바탕으로 1시간 간격의 자전거 대여횟수가 기록되어 있다. 
+# train / test로 분류 한 후 대여횟수에 중요도가 높은 칼럼을 판단하여 
+# feature를 선택한 후, 대여횟수에 대한 회귀예측을 하시오.  
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score
 
-from sklearn.metrics import confusion_matrix
-print(confusion_matrix(y,y_hat))
-# [[464  36]
-#  [ 67 433]]
-recall = 464/(464 + 36)        # 재현율 TPR
-fallout = 67 / (67 + 433)      # 위양성율 FPR
+# df = pd.read_csv("bike_dataset.csv")
+# # print(df.head(1))
+# # print(df.columns)
+# # print(df.info())
+# # print(df.isnull().sum())
+#
+# # 상관계수 확인
+# print(df.corr('count'))
+#
+# # 칼럼지정
+# df_x=df[['temp','atemp']]
+# # print(df_x.columns)
+# # print(df_x)
+#
+# df_y=df['count']
+# # print(df_y)
+#
+# # train/test 분류
+# x_train, x_test, y_train, y_test = train_test_split(df_x,df_y, test_size=0.2,random_state=1 )
+# # print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
+# # (8708, 3) (2178, 3) (8708,) (2178,)
+#
+# # 모델
+# rfmodel = RandomForestRegressor(n_estimators=1000,criterion='squared_error').fit(x_train,y_train )
+# rfpredict = rfmodel.predict(x_test)
+#
+# # 예측값, 실제값
+# print('예측값 : ', rfpredict[:10])
+# print('실제값 : ', np.array(y_test)[:10])
+#
+# # 결점계수
+# print('결점계수 : ', r2_score(y_test,rfpredict)) # 실제값,예측값
+# # 결점계수 :  0.21158056015042548
+#
+# # 예측
+# temp=int(input('temp(기온)  입력: '))
+# atemp=int(input('atemp(체감온도) 입력: ')) 
+#
+#
+# tdata = pd.Series(temp)
+# adata = pd.Series(atemp)
+# frame= pd.DataFrame()
+#
+# frame['temp']=tdata
+# frame['atemp']=adata
+# y_pred = rfmodel.predict(frame.values)
+# print('cont(총대여량) ',y_pred)
 
+# [XGBoost 문제] 
+#
+# 유리 식별 데이터베이스로 여러 가지 특징들에 의해 7 가지의 label(Type)로 분리된다.
+#
+# RI    Na    Mg    Al    Si    K    Ca    Ba    Fe   
+import xgboost as xgb
+
+df = pd.read_csv("https://raw.githubusercontent.com/pykwon/python/master/testdata_utf8/glass.csv")
+
+print(df.head(3))
+# print(df.Type.unique()) # [1 2 3 5 6 7]
+x_feature =df.drop(['Type'], axis='columns')
+# print(x_feature.head(3))
+y_label= df['Type']
+print(y_label.head(3))
+
+# train/test 분류
+x_train, x_test, y_train, y_test = train_test_split(x_feature,y_label, test_size=0.2, random_state=12)
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+y_train = le.fit_transform(y_train)
+
+print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
+
+# # 모델생성
+model = xgb.XGBClassifier(booster='gbtree', max_depth=4, n_estimators=500).fit(x_train,y_train)
+
+# 예측
+pred = model.predict(x_test)
+print('예측값 :', pred[:10])
+print('실제값 : ', y_test[:10]) 
 
 from sklearn import metrics
-cl_rep = metrics.classification_report(y,y_hat)
-print('cl_rep : ',cl_rep)
+acc = metrics.accuracy_score(y_test, pred)
+print('정확도 : ',acc)
+# 정확도 :  0.023255813953488372
+print()
 
-
-f_valu = model.decision_function(x)
-print('f_valu : ', f_valu)
-fpr, tpr, thresholds = metrics.roc_curve(y,f_valu)
-print('fpr : ', fpr)
-print('tpr : ', tpr)
-print('분류임계값  : ', thresholds)
-
+from xgboost import plot_importance
 import matplotlib.pyplot as plt
-plt.plot(fpr,tpr,'o-', label='Logistic Regression')
-plt.plot([0,1],[0,1], 'k--', label='classifier line(AUC:0.5')
-plt.plot([fallout],[recall],'ro', ms=10) # 위양성율 , 재현율 값
-plt.xlabel('fpr')
-plt.ylabel('tpr')
-plt.title('ROC curve')
-plt.legend()
+# 시각화 XGBClassifier 에서만 사용 가능
+fig, ax = plt.subplots(figsize=(10,12)) # 칼럼을 f숫자 으로 출력
+plot_importance(model,ax = ax)
 plt.show()
 
-# AUC ( Area Under the Curve ) : ROC 커브 면적
-print('AUC : ',metrics.auc(fpr,tpr)) # 1에 가까울 수록 좋은 모델임
-# AUC :  0.9580599999999999
+
+
 
 
