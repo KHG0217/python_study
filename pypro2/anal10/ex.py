@@ -320,45 +320,191 @@ from sklearn.metrics import r2_score
 # 유리 식별 데이터베이스로 여러 가지 특징들에 의해 7 가지의 label(Type)로 분리된다.
 #
 # RI    Na    Mg    Al    Si    K    Ca    Ba    Fe   
-import xgboost as xgb
+# import xgboost as xgb
+#
+# df = pd.read_csv("https://raw.githubusercontent.com/pykwon/python/master/testdata_utf8/glass.csv")
+#
+# print(df.head(3))
+# # print(df.Type.unique()) # [1 2 3 5 6 7]
+# x_feature =df.drop(['Type'], axis='columns')
+# # print(x_feature.head(3))
+# y_label= df['Type']
+# print(y_label.head(3))
+#
+# # train/test 분류
+# x_train, x_test, y_train, y_test = train_test_split(x_feature,y_label, test_size=0.2, random_state=12)
+# from sklearn.preprocessing import LabelEncoder
+# le = LabelEncoder()
+# y_train = le.fit_transform(y_train)
+#
+# print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
+#
+# # # 모델생성
+# model = xgb.XGBClassifier(booster='gbtree', max_depth=4, n_estimators=500).fit(x_train,y_train)
+#
+# # 예측
+# pred = model.predict(x_test)
+# print('예측값 :', pred[:10])
+# print('실제값 : ', y_test[:10]) 
+#
+# from sklearn import metrics
+# acc = metrics.accuracy_score(y_test, pred)
+# print('정확도 : ',acc)
+# # 정확도 :  0.023255813953488372
+# print()
+#
+# from xgboost import plot_importance
+# import matplotlib.pyplot as plt
+# # 시각화 XGBClassifier 에서만 사용 가능
+# fig, ax = plt.subplots(figsize=(10,12)) # 칼럼을 f숫자 으로 출력
+# plot_importance(model,ax = ax)
+# plt.show()
 
-df = pd.read_csv("https://raw.githubusercontent.com/pykwon/python/master/testdata_utf8/glass.csv")
 
+
+
+# [SVM 분류 문제] 심장병 환자 데이터를 사용하여 분류 정확도 분석 연습
+# https://www.kaggle.com/zhaoyingzhu/heartcsv
+# https://github.com/pykwon/python/tree/master/testdata_utf8         Heartcsv
+#
+#
+# Heart 데이터는 흉부외과 환자 303명을 관찰한 데이터다. 
+# 각 환자의 나이, 성별, 검진 정보 컬럼 13개와 마지막 AHD 칼럼에 각 환자들이 심장병이 있는지 여부가 기록되어 있다. 
+# dataset에 대해 학습을 위한 train과 test로 구분하고 
+# 분류 모델을 만들어, 모델 객체를 호출할 경우 정확한 확률을 확인하시오. 
+# 임의의 값을 넣어 분류 결과를 확인하시오.     
+# 정확도가 예상보다 적게 나올 수 있음에 실망하지 말자. ㅎㅎ
+#
+#
+#
+# feature 칼럼 : 문자 데이터 칼럼은 제외
+# label 칼럼 : AHD(중증 심장질환)
+#
+#
+#
+# 데이터 예)
+# "","Age","Sex","ChestPain","RestBP","Chol","Fbs","RestECG","MaxHR","ExAng","Oldpeak","Slope","Ca","Thal","AHD"
+#
+# "1",63,1,"typical",145,233,1,2,150,0,2.3,3,0,"fixed","No"
+#
+# "2",67,1,"asymptomatic",160,286,0,2,108,1,1.5,2,3,"normal","Yes"
+
+df=pd.read_csv("https://raw.githubusercontent.com/pykwon/python/master/testdata_utf8/Heart.csv")
+# print(df.columns)
 print(df.head(3))
-# print(df.Type.unique()) # [1 2 3 5 6 7]
-x_feature =df.drop(['Type'], axis='columns')
-# print(x_feature.head(3))
-y_label= df['Type']
-print(y_label.head(3))
+print(df.isnull().sum())
+# Ca            4
+# Thal          2
+
+# nan 값 평균으로 대체 Ca
+df.loc[df['Ca'] != df['Ca'], 'Ca'] = df['Ca'].mean()
+
+# nan 값 제거 Thal
+df=df.dropna()
+print(df.isnull().sum())
+
+# # 칼럼지정
+df_x=df.iloc[:,1:-1]
+# print(df_x.columns)
+# print(df_x.head(3))
+
+
+
+df_y=df['AHD']
+
+
+# label을 dummy화
+# print(df_x['ChestPain'].unique()) # ['typical' 'asymptomatic' 'nonanginal' 'nontypical']
+# print(df_x['Thal'].unique()) #['fixed' 'normal' 'reversable' nan]
+df_x['ChestPain'] = df_x['ChestPain'].map({'typical':0,'asymptomatic':1,'nonanginal':2,'nontypical':3})
+df_x['Thal'] = df_x['Thal'].map({'fixed':0,'normal':1,'reversable':2})
+
+# print(df_y.unique()) #['No' 'Yes']
+df_y = df_y.map({'No':0,'Yes':1})
+# print(df_y[:3])
 
 # train/test 분류
-x_train, x_test, y_train, y_test = train_test_split(x_feature,y_label, test_size=0.2, random_state=12)
-from sklearn.preprocessing import LabelEncoder
-le = LabelEncoder()
-y_train = le.fit_transform(y_train)
+x_train, x_test, y_train, y_test = train_test_split(df_x,df_y, test_size=0.2, random_state=12)
+# print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
+#(242, 13) (61, 13) (242,) (61,) 13개의 독립변수
 
-print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
+# model
+from sklearn import svm, metrics
+model = svm.SVC(C= 0.1).fit(x_train,y_train)
 
-# # 모델생성
-model = xgb.XGBClassifier(booster='gbtree', max_depth=4, n_estimators=500).fit(x_train,y_train)
-
-# 예측
+# 예측한 결과
 pred = model.predict(x_test)
-print('예측값 :', pred[:10])
-print('실제값 : ', y_test[:10]) 
+print('예측값 : ', pred[:10])
+print('실제값 : ', y_test[:10].values)
 
-from sklearn import metrics
-acc = metrics.accuracy_score(y_test, pred)
-print('정확도 : ',acc)
-# 정확도 :  0.023255813953488372
+# 예측값 :  [0 0 0 0 0 0 0 0 0 0]
+# 실제값 :  [1 1 0 0 1 0 1 1 1 0]
+ac_score = metrics.accuracy_score(y_test,pred)
+print(ac_score) #0.6
+
 print()
+# 교차 검증 모델
+from sklearn import model_selection
+cross_vali = model_selection.cross_val_score(model, df_x, df_y, cv =3)
+print('각각의 검증 정확도 : ',cross_vali)
+print('평균 검증 정확도 : ',cross_vali.mean())
 
-from xgboost import plot_importance
-import matplotlib.pyplot as plt
-# 시각화 XGBClassifier 에서만 사용 가능
-fig, ax = plt.subplots(figsize=(10,12)) # 칼럼을 f숫자 으로 출력
-plot_importance(model,ax = ax)
-plt.show()
+# 각각의 검증 정확도 :  [0.54545455 0.53535354 0.53535354]
+# 평균 검증 정확도 :  0.5387205387205388
+
+# # 예측
+# Index(['Age', 'Sex', 'ChestPain', 'RestBP', 'Chol', 
+#        'Fbs', 'RestECG', 'MaxHR',
+#        'ExAng', 'Oldpeak', 'Slope', 'Ca', 'Thal']
+Age=int(input('Age 입력: '))
+Sex=int(input('Sex 입력: ')) 
+ChestPain=int(input('ChestPain 입력: (typical:0,asymptomatic:1,nonanginal:2,nontypical:3:)'))
+RestBP=int(input('RestBP 입력: ')) 
+Chol=int(input('Chol 입력: ')) 
+Fbs=int(input('Fbs 입력: ')) 
+RestECG=int(input('RestECG 입력: ')) 
+MaxHR=int(input('MaxHR 입력: ')) 
+ExAng=int(input('ExAng 입력: ')) 
+Oldpeak=int(input('Oldpeak 입력: ')) 
+Slope=int(input('Slope 입력: ')) 
+Ca=int(input('Ca 입력: ')) 
+Thal=int(input('Thal 입력: (fixed:0,normal:1,reversable:2)'))
+
+
+tdata1 = pd.Series(Age)
+tdata2 = pd.Series(Sex)
+tdata3 = pd.Series(ChestPain)
+tdata4 = pd.Series(RestBP)
+tdata5 = pd.Series(Chol)
+tdata6 = pd.Series(Fbs)
+tdata7 = pd.Series(RestECG)
+tdata8 = pd.Series(MaxHR)
+tdata9 = pd.Series(ExAng)
+tdata10 = pd.Series(Oldpeak)
+tdata11 = pd.Series(Slope)
+tdata12 = pd.Series(Ca)
+tdata13 = pd.Series(Thal)
+
+
+frame= pd.DataFrame()
+
+frame['Age']=tdata1
+frame['Sex']=tdata2
+frame['ChestPain']=tdata3
+frame['RestBP']=tdata4
+frame['Chol']=tdata5
+frame['Fbs']=tdata6
+frame['RestECG']=tdata7
+frame['MaxHR']=tdata8
+frame['ExAng']=tdata9
+frame['Oldpeak']=tdata10
+frame['Slope']=tdata11
+frame['Ca']=tdata12
+frame['Thal']=tdata13
+
+y_pred = model.predict(frame.values)
+print('AHD(중증 심장질환): ',y_pred)
+
 
 
 
