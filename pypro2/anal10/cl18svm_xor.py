@@ -30,9 +30,10 @@ print(label) # 1차원 [0, 1, 1, 0]
 # model = LogisticRegression()
 model = svm.SVC()
 
-model.fit(feature, label)
+fit=model.fit(feature, label)
 
-pred= model.predict(feature)
+
+# pred= model.predict(feature)
 print('예측값 :', pred)
 print('실제값 : ', label)
 

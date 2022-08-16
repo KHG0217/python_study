@@ -10,7 +10,7 @@ print(feature)
 label = np.array([0,1,1,0]) # xor -> wx+b를 쓰고있는 선형회귀이기때문에 처리할 수 없다.
 
 # MLP로 xor 문제를 해결
-ml = MLPClassifier(hidden_layer_sizes=3, solver = 'adam', learning_rate_init=0.01)
+ml = MLPClassifier(hidden_layer_sizes=10, solver = 'adam', learning_rate_init=0.01)
 ml.fit(feature, label)
 
 pred = ml.predict(feature)

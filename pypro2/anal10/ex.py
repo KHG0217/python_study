@@ -1,13 +1,13 @@
-
-
-from io import StringIO
-
-from daal4py._daal4py import np
-from daal4py.sklearn.linear_model.logistic_path import LogisticRegression
-from sklearn.metrics._classification import accuracy_score
-from sklearn.model_selection._split import train_test_split
-
-import pandas as pd
+#
+#
+# from io import StringIO
+#
+# from daal4py._daal4py import np
+# from daal4py.sklearn.linear_model.logistic_path import LogisticRegression
+# from sklearn.metrics._classification import accuracy_score
+# from sklearn.model_selection._split import train_test_split
+#
+# import pandas as pd
 
 
 # data =StringIO("""
@@ -264,8 +264,13 @@ import pandas as pd
 # 날짜/시간. 기온, 습도, 풍속 등의 정보를 바탕으로 1시간 간격의 자전거 대여횟수가 기록되어 있다. 
 # train / test로 분류 한 후 대여횟수에 중요도가 높은 칼럼을 판단하여 
 # feature를 선택한 후, 대여횟수에 대한 회귀예측을 하시오.  
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import r2_score
+
+# from sklearn.ensemble import RandomForestRegressor
+# from sklearn.metrics import r2_score
+# from statsmodels.formula.api import ols
+#
+# import pandas as pd
+
 
 # df = pd.read_csv("bike_dataset.csv")
 # # print(df.head(1))
@@ -314,7 +319,6 @@ from sklearn.metrics import r2_score
 # frame['atemp']=adata
 # y_pred = rfmodel.predict(frame.values)
 # print('cont(총대여량) ',y_pred)
-
 # [XGBoost 문제] 
 #
 # 유리 식별 데이터베이스로 여러 가지 특징들에 의해 7 가지의 label(Type)로 분리된다.
@@ -387,125 +391,219 @@ from sklearn.metrics import r2_score
 #
 # "1",63,1,"typical",145,233,1,2,150,0,2.3,3,0,"fixed","No"
 #
-# "2",67,1,"asymptomatic",160,286,0,2,108,1,1.5,2,3,"normal","Yes"
-
-df=pd.read_csv("https://raw.githubusercontent.com/pykwon/python/master/testdata_utf8/Heart.csv")
-# print(df.columns)
-print(df.head(3))
-print(df.isnull().sum())
-# Ca            4
-# Thal          2
-
-# nan 값 평균으로 대체 Ca
-df.loc[df['Ca'] != df['Ca'], 'Ca'] = df['Ca'].mean()
-
-# nan 값 제거 Thal
-df=df.dropna()
-print(df.isnull().sum())
-
-# # 칼럼지정
-df_x=df.iloc[:,1:-1]
-# print(df_x.columns)
-# print(df_x.head(3))
+# "2",67,1,"asymptomatic",160,286,0,2,108,1,1.5,2,3,"normal","s
 
 
+# df=pd.read_csv("https://raw.githubusercontent.com/pykwon/python/master/testdata_utf8/Heart.csv")
+# # print(df.columns)
+# print(df.head(3))
+# print(df.isnull().sum())
+# # Ca            4
+# # Thal          2
+#
+# # nan 값 평균으로 대체 Ca
+# df.loc[df['Ca'] != df['Ca'], 'Ca'] = df['Ca'].mean()
+#
+# # nan 값 제거 Thal
+# df=df.dropna()
+# print(df.isnull().sum())
+#
+# # # 칼럼지정
+# df_x=df.iloc[:,1:-1]
+# # print(df_x.columns)
+# # print(df_x.head(3))
+#
+#
+#
+# df_y=df['AHD']
+#
+#
+# # label을 dummy화
+# # print(df_x['ChestPain'].unique()) # ['typical' 'asymptomatic' 'nonanginal' 'nontypical']
+# # print(df_x['Thal'].unique()) #['fixed' 'normal' 'reversable' nan]
+# df_x['ChestPain'] = df_x['ChestPain'].map({'typical':0,'asymptomatic':1,'nonanginal':2,'nontypical':3})
+# df_x['Thal'] = df_x['Thal'].map({'fixed':0,'normal':1,'reversable':2})
+#
+# # print(df_y.unique()) #['No' 'Yes']
+# df_y = df_y.map({'No':0,'Yes':1})
+# # print(df_y[:3])
+#
+# # train/test 분류
+# x_train, x_test, y_train, y_test = train_test_split(df_x,df_y, test_size=0.2, random_state=12)
+# # print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
+# #(242, 13) (61, 13) (242,) (61,) 13개의 독립변수
+#
+# # model
+# from sklearn import svm, metrics
+# model = svm.SVC(C= 0.1).fit(x_train,y_train)
+#
+# # 예측한 결과
+# pred = model.predict(x_test)
+# print('예측값 : ', pred[:10])
+# print('실제값 : ', y_test[:10].values)
+#
+# # 예측값 :  [0 0 0 0 0 0 0 0 0 0]
+# # 실제값 :  [1 1 0 0 1 0 1 1 1 0]
+# ac_score = metrics.accuracy_score(y_test,pred)
+# print(ac_score) #0.6
+#
+# print()
+# # 교차 검증 모델
+# from sklearn import model_selection
+# cross_vali = model_selection.cross_val_score(model, df_x, df_y, cv =3)
+# print('각각의 검증 정확도 : ',cross_vali)
+# print('평균 검증 정확도 : ',cross_vali.mean())
+#
+# # 각각의 검증 정확도 :  [0.54545455 0.53535354 0.53535354]
+# # 평균 검증 정확도 :  0.5387205387205388
+#
+# # # 예측
+# # Index(['Age', 'Sex', 'ChestPain', 'RestBP', 'Chol', 
+# #        'Fbs', 'RestECG', 'MaxHR',
+# #        'ExAng', 'Oldpeak', 'Slope', 'Ca', 'Thal']
+# Age=int(input('Age 입력: '))
+# Sex=int(input('Sex 입력: ')) 
+# ChestPain=int(input('ChestPain 입력: (typical:0,asymptomatic:1,nonanginal:2,nontypical:3:)'))
+# RestBP=int(input('RestBP 입력: ')) 
+# Chol=int(input('Chol 입력: ')) 
+# Fbs=int(input('Fbs 입력: ')) 
+# RestECG=int(input('RestECG 입력: ')) 
+# MaxHR=int(input('MaxHR 입력: ')) 
+# ExAng=int(input('ExAng 입력: ')) 
+# Oldpeak=int(input('Oldpeak 입력: ')) 
+# Slope=int(input('Slope 입력: ')) 
+# Ca=int(input('Ca 입력: ')) 
+# Thal=int(input('Thal 입력: (fixed:0,normal:1,reversable:2)'))
+#
+#
+# tdata1 = pd.Series(Age)
+# tdata2 = pd.Series(Sex)
+# tdata3 = pd.Series(ChestPain)
+# tdata4 = pd.Series(RestBP)
+# tdata5 = pd.Series(Chol)
+# tdata6 = pd.Series(Fbs)
+# tdata7 = pd.Series(RestECG)
+# tdata8 = pd.Series(MaxHR)
+# tdata9 = pd.Series(ExAng)
+# tdata10 = pd.Series(Oldpeak)
+# tdata11 = pd.Series(Slope)
+# tdata12 = pd.Series(Ca)
+# tdata13 = pd.Series(Thal)
+#
+#
+# frame= pd.DataFrame()
+#
+# frame['Age']=tdata1
+# frame['Sex']=tdata2
+# frame['ChestPain']=tdata3
+# frame['RestBP']=tdata4
+# frame['Chol']=tdata5
+# frame['Fbs']=tdata6
+# frame['RestECG']=tdata7
+# frame['MaxHR']=tdata8
+# frame['ExAng']=tdata9
+# frame['Oldpeak']=tdata10
+# frame['Slope']=tdata11
+# frame['Ca']=tdata12
+# frame['Thal']=tdata13
+#
+# y_pred = model.predict(frame.values)
+# print('AHD(중증 심장질환): ',y_p
 
-df_y=df['AHD']
 
 
-# label을 dummy화
-# print(df_x['ChestPain'].unique()) # ['typical' 'asymptomatic' 'nonanginal' 'nontypical']
-# print(df_x['Thal'].unique()) #['fixed' 'normal' 'reversable' nan]
-df_x['ChestPain'] = df_x['ChestPain'].map({'typical':0,'asymptomatic':1,'nonanginal':2,'nontypical':3})
-df_x['Thal'] = df_x['Thal'].map({'fixed':0,'normal':1,'reversable':2})
 
-# print(df_y.unique()) #['No' 'Yes']
-df_y = df_y.map({'No':0,'Yes':1})
-# print(df_y[:3])
 
-# train/test 분류
-x_train, x_test, y_train, y_test = train_test_split(df_x,df_y, test_size=0.2, random_state=12)
-# print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
-#(242, 13) (61, 13) (242,) (61,) 13개의 독립변수
+#  testdata 폴더에 저장된 student.csv 파일을 이용하여 세 과목 점수에 대한 회귀분석 모델을 만든다.
+# 만들어진 회귀문제 모델을 이용하여 아래의 문제를 해결하시오. (ols 함수를 사용하시오.)
+#
+# - 키보드로 국어 점수를 입력하면 수학 점수 예측 (80점을 입력하자)배점:
+# import pandas as pd
+#
+# df=pd.read_csv("testdata/student.csv ")
+#
+# # print(df.head(3))
+#
+# df_x=df['국어']
+# df_y=df['수학']
+# from statsmodels.formula.api import ols
+# model = ols('수학 ~ 국어', data=df).fit()
+#
+# pred = model.predict(df_x)
+#
+# x=[80]
+#
+# frame= pd.DataFrame()
+# frame['국어']=x
+#
+# y_pred = model.predict(frame['국어'])
+# print('수학점수 예측: ',y_pred.values)
 
-# model
-from sklearn import svm, metrics
-model = svm.SVC(C= 0.1).fit(x_train,y_train)
 
-# 예측한 결과
+# import pandas as pd
+# x = 1,2,3,4,5
+# y = 8,7,6,4,5
+#
+# df = pd.DataFrame({'x':x, 'y':y})
+#
+# print(df.corr())
+#
+# import pandas as pd
+#
+# data = pd.read_csv('testdata/titanic_data.csv', usecols=['Survived', 'Pclass', 'Sex', 'Age','Fare'])
+# print(data.head(2), data.shape) # (891, 12)
+# data.loc[data["Sex"] == "male","Sex"] = 0
+# data.loc[data["Sex"] == "female", "Sex"] = 1
+# print(data["Sex"].head(2))
+# print(data.columns)
+#
+# feature = data[["Pclass", "Sex", "Fare"]]
+# label = data["Survived"]
+#
+# # 이하 소스 코드를 적으시오.
+# # 1) train_test_split (7:3), random_state=12
+# # 2) DecisionTreeClassifier 클래스를 사용해 분류 모델 작성
+# # 3) 분류 정확도 출력 (배점:10)
+#
+# from sklearn.model_selection._split import train_test_split
+# from sklearn.metrics import r2_score
+# x_train, x_test, y_train, y_test =train_test_split(feature,label, test_size=0.3, random_state=12) 
+# # 실습 1 : DecisionTreeClassifier
+# from sklearn.tree import DecisionTreeRegressor
+# model = DecisionTreeRegressor(criterion='squared_error').fit(x_train,y_train)
+# print('예측값 : ', model.predict(x_test)[:5])
+# print('실제값 : ', y_test[:5])
+# print('결점계수 : ', r2_score(y_test,model.predict(x_test))) #결점계수 :  0.1473600932288931
+# print()
+#
+
+
+# feature(독립) columns :
+# fixed acidity, volatile acidity, citric acid, residual sugar, chlorides,
+# free sulfur dioxide, total sulfur dioxide, density, pH, sulphates, alcohol
+# label(종속) column : quality (배점:10)
+# 코드 시작
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+import pandas as pd
+from sklearn.metrics import accuracy_score
+
+df = pd.read_csv("winequality-red.csv")
+df_x = df.drop(['quality'], axis=1)  # feature로 사용. quality를 제외한 나머지 열
+df_y = df['quality']  # label로 사용
+print(df_y.unique())  # [5 6 7 4 8 3]
+print(df_x.columns)  # ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', ...
+
+# 이하 소스 코드를 적으시오.
+# 1) train_test_split (7:3), random_state=12
+x_train, x_test, y_train, y_test =train_test_split(df_x,df_y, test_size=0.3, random_state=12) 
+
+# 실습 2 : RandomForestClassifier
+model = RandomForestClassifier(criterion='entropy', n_estimators=500).fit(x_train,y_train)
 pred = model.predict(x_test)
-print('예측값 : ', pred[:10])
-print('실제값 : ', y_test[:10].values)
-
-# 예측값 :  [0 0 0 0 0 0 0 0 0 0]
-# 실제값 :  [1 1 0 0 1 0 1 1 1 0]
-ac_score = metrics.accuracy_score(y_test,pred)
-print(ac_score) #0.6
-
-print()
-# 교차 검증 모델
-from sklearn import model_selection
-cross_vali = model_selection.cross_val_score(model, df_x, df_y, cv =3)
-print('각각의 검증 정확도 : ',cross_vali)
-print('평균 검증 정확도 : ',cross_vali.mean())
-
-# 각각의 검증 정확도 :  [0.54545455 0.53535354 0.53535354]
-# 평균 검증 정확도 :  0.5387205387205388
-
-# # 예측
-# Index(['Age', 'Sex', 'ChestPain', 'RestBP', 'Chol', 
-#        'Fbs', 'RestECG', 'MaxHR',
-#        'ExAng', 'Oldpeak', 'Slope', 'Ca', 'Thal']
-Age=int(input('Age 입력: '))
-Sex=int(input('Sex 입력: ')) 
-ChestPain=int(input('ChestPain 입력: (typical:0,asymptomatic:1,nonanginal:2,nontypical:3:)'))
-RestBP=int(input('RestBP 입력: ')) 
-Chol=int(input('Chol 입력: ')) 
-Fbs=int(input('Fbs 입력: ')) 
-RestECG=int(input('RestECG 입력: ')) 
-MaxHR=int(input('MaxHR 입력: ')) 
-ExAng=int(input('ExAng 입력: ')) 
-Oldpeak=int(input('Oldpeak 입력: ')) 
-Slope=int(input('Slope 입력: ')) 
-Ca=int(input('Ca 입력: ')) 
-Thal=int(input('Thal 입력: (fixed:0,normal:1,reversable:2)'))
-
-
-tdata1 = pd.Series(Age)
-tdata2 = pd.Series(Sex)
-tdata3 = pd.Series(ChestPain)
-tdata4 = pd.Series(RestBP)
-tdata5 = pd.Series(Chol)
-tdata6 = pd.Series(Fbs)
-tdata7 = pd.Series(RestECG)
-tdata8 = pd.Series(MaxHR)
-tdata9 = pd.Series(ExAng)
-tdata10 = pd.Series(Oldpeak)
-tdata11 = pd.Series(Slope)
-tdata12 = pd.Series(Ca)
-tdata13 = pd.Series(Thal)
-
-
-frame= pd.DataFrame()
-
-frame['Age']=tdata1
-frame['Sex']=tdata2
-frame['ChestPain']=tdata3
-frame['RestBP']=tdata4
-frame['Chol']=tdata5
-frame['Fbs']=tdata6
-frame['RestECG']=tdata7
-frame['MaxHR']=tdata8
-frame['ExAng']=tdata9
-frame['Oldpeak']=tdata10
-frame['Slope']=tdata11
-frame['Ca']=tdata12
-frame['Thal']=tdata13
-
-y_pred = model.predict(frame.values)
-print('AHD(중증 심장질환): ',y_pred)
-
-
+print('예측값 : ', model.predict(x_test)[:5])
+print('실제값 : ', y_test[:5])
+print('분류 정확도 : ', accuracy_score(y_test,pred)) # 분류 정확도 :  0.6638
 
 
 
