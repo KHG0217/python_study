@@ -33,16 +33,28 @@ print(y)    # label
 # ])
 
 model = Sequential()
-model.add(Dense(units=1, input_dim=2))
-model.add(Activation('sigmoid'))
-
+# model.add(Dense(units=1, input_dim=2))
+# model.add(Activation('sigmoid'))
+model.add(Dense(units=1, input_dim=2, activation='sigmoid'))
 # 3. 모델 학습 과정 설정(Compile)
 #
 #   학습하기 전, 학습에 대한 설정을 수행한다. 
 #   손실 함수 및 최적화 방법을 정의. compile() 함수를 사용한다.
 
-model.compile(optimizer='sgd', loss='binary_crossentropy', metrics=['accuracy'])
+# model.compile(optimizer='sgd', loss='binary_crossentropy', metrics=['accuracy'])
+# model.compile(optimizer=tf.keras.optimizers.SGD(learning_rate=0.1), loss='binary_crossentropy', metrics=['accuracy'])
+# model.compile(optimizer=tf.keras.optimizers.SGD(learning_rate=0.1, momentum=0.9), loss='binary_crossentropy', metrics=['accuracy'])
+# learning_rate: 최적의값을 찾아가는 폭, momentum : 최적의폭을 벗어나는 정도(다음 폭으로 넘어가기위해)
+
+# model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
+# model.compile(optimizer=tf.keras.optimizers.RMSprop(learning_rate=0.1), loss='binary_crossentropy', metrics=['accuracy'])
+# rmsprop 는 momentum을 찾아 최소의 코스트값을 찾아줌
+
+# model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.1), loss='binary_crossentropy', metrics=['accuracy'])
 print(model.summary())
+# learning_rate 을 변경할땐 클래스로 불러오기 / 요즘은 rmsprop,adam 주로 사용 (하지만 어떤 데이터는 sgd가 잘나온다)
+# 3가지 모두 써보고 잘나오는 값을 모델로 잡기
 
 # 4. 모델 학습시키기
 #   훈련셋을 이용하여 구성한 모델로 학습 시킨다. fit() 함수를 사용한다.
