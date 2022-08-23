@@ -149,11 +149,11 @@ from keras.models import Sequential
 from keras.layers import Dense
 
 model = Sequential()
-model.add(Dense(20, input_dim=3, activation='linear'))
-model.add(Dense(10, activation='linear'))
-model.add(Dense(1, activation='linear'))
+model.add(Dense(64, input_dim=8, activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(2, activation='softmax'))
 
-model.compile(optimizer='adam', loss='mse', metrics = ['mse'])
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
 # print(model.summary())
 
 import tensorflow as tf
